@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreMenuRequest extends FormRequest
 {
@@ -13,7 +11,7 @@ class StoreMenuRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,20 +22,7 @@ class StoreMenuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'price' => 'required',
-            'image' => 'required',
-            'description' => 'required',
-            'jenis_id' => 'required'
+            //
         ];
-    }
-
-    public function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-            'success' => false,
-            'message' => 'validation errors',
-            'data' => $validator->errors()
-        ]));
     }
 }

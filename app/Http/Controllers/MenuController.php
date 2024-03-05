@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use PDOException;
 use App\Models\Menu;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
+use App\Models\Kategori;
+
+use function Laravel\Prompts\select;
 
 class MenuController extends Controller
 {
@@ -15,12 +16,12 @@ class MenuController extends Controller
      */
     public function index()
     {
-        try {
-            $data = Menu::get();
-            return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
-        }catch (Exception | PDOException $e){
-            return response()->json([`status` => false, 'message' => 'gagal menampilkan data']);
-        }
+        $data['kategoris'] = Kategori::get();
+        $data['menus'] = Menu::join('kategoris', 'menus.kategori_id', '=', 'kategoris.id')
+                                ->select('menus.*', 'kategoris.id as idKategori', 'kategoris.name')
+                                ->orderBy('created_at', 'DESC')
+                                ->get();
+        return view('menu.index', ['title' => 'Menu'])->with($data);
     }
 
     /**
@@ -36,12 +37,7 @@ class MenuController extends Controller
      */
     public function store(StoreMenuRequest $request)
     {
-        try {
-            $data = Menu::create($request->all());
-            return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
-        }catch (Exception | PDOException $e){
-            return response()->json(['status' => false, 'message' => 'gagal menampilkan data']);
-        }
+        //
     }
 
     /**
@@ -63,14 +59,9 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreMenuRequest $request, Menu $menu)
+    public function update(UpdateMenuRequest $request, Menu $menu)
     {
-        try {
-            $data = $menu->update($request->all());
-            return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
-        }catch (Exception | PDOException $e){
-            return response()->json([`status` => false, 'message' => 'gagal menampilkan data']);
-        }
+        //
     }
 
     /**
@@ -78,11 +69,6 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        try {
-            $data = $menu->delete();
-            return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
-        }catch (Exception | PDOException $e){
-            return response()->json([`status` => false, 'message' => 'gagal menampilkan data']);
-        }
+        //
     }
 }

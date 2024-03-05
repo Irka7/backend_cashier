@@ -11,4 +11,9 @@ class Menu extends Model
 
     protected $table = 'menus';
     protected $guarded = ['id'];
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id');
+    }
 }

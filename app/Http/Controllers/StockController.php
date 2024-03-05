@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use PDOException;
 use App\Models\Stock;
 use App\Http\Requests\StoreStockRequest;
 use App\Http\Requests\UpdateStockRequest;
@@ -15,12 +13,7 @@ class StockController extends Controller
      */
     public function index()
     {
-        try {
-            $data = Stock::get();
-            return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
-        }catch (Exception | PDOException $e){
-            return response()->json(['status' => false, 'message' => 'gagal menampilkan data']);
-        }
+        //
     }
 
     /**
@@ -36,12 +29,7 @@ class StockController extends Controller
      */
     public function store(StoreStockRequest $request)
     {
-        try {
-            $data = Stock::create($request->all());
-            return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
-        }catch (Exception | PDOException $e){
-            return response()->json(['status' => false, 'message' => 'gagal menampilkan data']);
-        }
+        //
     }
 
     /**
@@ -63,14 +51,9 @@ class StockController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreStockRequest $request, Stock $stock)
+    public function update(UpdateStockRequest $request, Stock $stock)
     {
-        try {
-            $data = $stock->update($request->all());
-            return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
-        }catch (Exception | PDOException $e){
-            return response()->json(['status' => false, 'message' => 'gagal menampilkan data']);
-        }
+        //
     }
 
     /**
@@ -78,11 +61,6 @@ class StockController extends Controller
      */
     public function destroy(Stock $stock)
     {
-        try {
-            $data = $stock->delete();
-            return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
-        }catch (Exception | PDOException $e){
-            return response()->json(['status' => false, 'message' => 'gagal menampilkan data']);
-        }
+        //
     }
 }

@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JenisController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +19,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(LoginController::class)->group(function () {
+    Route::get('login', 'index')->name('login')->middleware('guest');
+    Route::post('login/access', 'authenticate');
+    Route::get('logout', 'logout');
 });
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/', function () {
+        return view('templates.home', [
+            'title' => 'Dashboard'
+        ]);
+    });
+
+
+
+    Route::resource('kategori', KategoriController::class);
+    Route::get('export/kategori', [KategoriController::class, 'exportData'])->name('export-kategori');
+    Route::post('kategori/import', [KategoriController::class, 'importData'])->name('import-kategori');
+    Route::resource('jenis', JenisController::class);
+    Route::resource('user', UserController::class);
+    Route::resource('menu', MenuController::class);
+
+});
+Route::get('transaksi', [TransactionController::class, 'index']);
+
+
+// Route::get('/login', function() {
+//     return view('login');
+// });

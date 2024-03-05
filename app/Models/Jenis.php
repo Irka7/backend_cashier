@@ -10,10 +10,6 @@ class Jenis extends Model
     use HasFactory;
 
     protected $table = 'jenis';
-    protected $fillable = ['name', 'kategori_id'];
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
+    protected $guarded = ['id'];
 }

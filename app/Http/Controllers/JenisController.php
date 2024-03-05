@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use PDOException;
 use App\Models\Jenis;
-use Illuminate\Support\Facades\DB;
-use App\Http\Requests\JenisRequest;
 use App\Http\Requests\StoreJenisRequest;
 use App\Http\Requests\UpdateJenisRequest;
 
@@ -17,12 +13,8 @@ class JenisController extends Controller
      */
     public function index()
     {
-        try {
-            $data = Jenis::get();
-            return response()->json(['status' => true, 'message' => 'success', 'data' => $data]);
-        }catch (Exception | PDOException $e){
-            return response()->json([`status` => false, 'message' => 'gagal menampilkan data']);
-        }
+        $data['jenis'] = Jenis::orderBy('created_at', 'DESC')->get();
+        return view('jenis.index', ['title' => 'Jenis',])->with($data);
     }
 
     /**
@@ -36,16 +28,10 @@ class JenisController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(JenisRequest $request)
+    public function store(StoreJenisRequest $request)
     {
-        try {
-            $data = Jenis::create($request->all());
-
-            DB::commit();
-            return response()->json(['status' => true, 'message' => ' input data success', 'data' => $data]);
-        }catch (Exception | PDOException $e){
-            return response()->json(["status" => false, 'message' => 'gagal menambahkan data']);
-        }
+        $data = Jenis::create($request->all());
+        return redirect('jenis')->with('success', 'Data Jenis Berhasil ditambahkan!');
     }
 
     /**
@@ -67,16 +53,10 @@ class JenisController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(JenisRequest $request, Jenis $jeni)
+    public function update(UpdateJenisRequest $request, Jenis $jeni)
     {
-        try {
-
-            $data = $jeni->update($request->all());
-
-            return response()->json(['status' => true, 'message' => 'update data success', 'data' => $data]);
-        }catch (Exception | PDOException $e){
-            return response()->json([`status` => false, 'message' => 'gagal mengubah data']);
-        }
+        $data = $jeni->update($request->all());
+        return redirect('jenis')->with('success', 'Data Jenis berhasil diubah!');
     }
 
     /**
@@ -84,11 +64,7 @@ class JenisController extends Controller
      */
     public function destroy(Jenis $jeni)
     {
-        try {
-            $data = $jeni->delete();
-            return response()->json(['status' => true, 'message' => 'delete data success', 'data' => $data]);
-        }catch (Exception | PDOException $e){
-            return response()->json([`status` => false, 'message' => 'gagal menghapus data']);
-        }
+        $data = $jeni->delete();
+        return redirect('jenis')->with('success', 'Data Jenis berhasil dihapus!');
     }
 }
