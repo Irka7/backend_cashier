@@ -5,6 +5,7 @@ use App\Http\Controllers\JenisController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 
@@ -33,6 +34,12 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
     });
 
+    Route::get('info', function () {
+        return view('templates.info', [
+            'title' => 'Tentang Aplikasi'
+        ]);
+    });
+
 
 
     Route::resource('kategori', KategoriController::class);
@@ -41,6 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('jenis', JenisController::class);
     Route::resource('user', UserController::class);
     Route::resource('menu', MenuController::class);
+    Route::resource('produk', ProdukController::class);
+    Route::put('produk/{id}', [ProdukController::class, 'update'])->name('update.stock');
 
 });
 Route::get('transaksi', [TransactionController::class, 'index']);

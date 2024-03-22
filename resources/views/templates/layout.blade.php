@@ -79,10 +79,10 @@
                         <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="kategori" class="nav-link">
-                                <i class="nav-icon fas fa-list"></i>
+                            <a href="produk" class="nav-link">
+                                <i class="nav-icon fas fa-box"></i>
                                 <p>
-                                    Kategori
+                                    produk
                                 </p>
                             </a>
                         </li>
@@ -92,10 +92,10 @@
                         <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="jenis" class="nav-link">
+                            <a href="kategori" class="nav-link">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>
-                                    Jenis
+                                    kategori
                                 </p>
                             </a>
                         </li>
@@ -109,6 +109,19 @@
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
                                     Users
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="info" class="nav-link">
+                                <i class="nav-icon fas fa-info"></i>
+                                <p>
+                                    Tentang Aplikasi
                                 </p>
                             </a>
                         </li>

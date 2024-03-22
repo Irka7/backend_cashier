@@ -13,7 +13,8 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        //
+        $data['produks'] = Produk::orderBy('created_at', 'DESC')->get();
+        return view('produk.index', ['title' => 'Produk Titipan'])->with($data);
     }
 
     /**
@@ -29,7 +30,8 @@ class ProdukController extends Controller
      */
     public function store(StoreProdukRequest $request)
     {
-        //
+        $data = Produk::create($request->all());
+        return redirect('produk')->with('success', 'Data Produk Berhasil ditambahkan!');
     }
 
     /**
@@ -53,7 +55,8 @@ class ProdukController extends Controller
      */
     public function update(UpdateProdukRequest $request, Produk $produk)
     {
-        //
+        $data = $produk->update($request->all());
+        return redirect('produk')->with('success', 'Data Produk Berhasil diubah!');
     }
 
     /**
@@ -61,6 +64,7 @@ class ProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
-        //
+        $data = $produk->delete();
+        return redirect('produk')->with('success', 'Data Produk Berhasil dihapus!');
     }
 }
