@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('detail_transactions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('transaksi_id');
+            $table->unsignedBigInteger('menu_id');
+            $table->integer('jumlah');
+            $table->decimal('subtotal');
             $table->timestamps();
         });
     }

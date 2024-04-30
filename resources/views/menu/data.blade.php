@@ -1,11 +1,10 @@
-<table class="table table-compact table-stripped" id="tabelJenis">
+<table class="table table-compact table-stripped" id="tabelMenu">
     <thead>
         <tr>
             <th>No</th>
             <th>Nama Menu</th>
             <th>Kategori</th>
             <th>Harga</th>
-            <th>Stok</th>
             <th>Gambar</th>
             <th>Deskripsi</th>
             <th>Aksi</th>
@@ -18,13 +17,18 @@
                 <td>{{ $m->menu_name }}</td>
                 <td>{{ $m->name }}</td>
                 <td>{{ $m->price }}</td>
-                <td>{{ $m->stock }}</td>
-                <td>{{ isset($m->image) ? $m->image : 'tidak ada gambar' }}</td>
+                {{-- <td>{{ isset($m->image) ? $m->image : 'tidak ada gambar' }}</td> --}}
+                <td><img width="70px" src="{{ asset('storage/image') }}/{{ $m->image }}" alt=""></td>
                 <td>{{ $m->description }}</td>
 
                 <td>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#formJenis" data-mode="edit" data-id="{{ $m->id }}" data-name="{{ $m->name }}"><i class="fas fa-edit"></i></button>
-                    <form action="jenis/{{ $m->id }}" style="display: inline" method="post">
+                    <button class="btn btn-info" data-toggle="modal" data-target="#formMenu" data-mode="edit" data-id="{{ $m->id }}"
+                        data-menu_name="{{ $m->menu_name }}"
+                        data-kategori_id="{{ $m->name }}"
+                        data-price="{{ $m->price }}"
+                        data-image="{{ $m->image }}"
+                        data-description="{{ $m->description }}"><i class="fas fa-edit"></i></button>
+                    <form action="menu/{{ $m->id }}" style="display: inline" method="post">
                         @csrf
                         @method('DELETE')
                         <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash"></i></button>

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('menu_name', 100);
             $table->double('price');
-            $table->integer('stock');
+            // $table->integer('stock');
             $table->text('description');
-            $table->integer('image')->nullable();
+            // $table->integer('image')->nullable();
             $table->unsignedBigInteger('kategori_id');
             $table->timestamps();
         });

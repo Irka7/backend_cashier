@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Jenis;
 use App\Http\Requests\StoreJenisRequest;
 use App\Http\Requests\UpdateJenisRequest;
+use Exception;
+use PDOException;
 
 class JenisController extends Controller
 {
@@ -13,8 +15,11 @@ class JenisController extends Controller
      */
     public function index()
     {
-        $data['jenis'] = Jenis::orderBy('created_at', 'DESC')->get();
-        return view('jenis.index', ['title' => 'Jenis',])->with($data);
+        try {
+            $data['jenis'] = Jenis::orderBy('created_at', 'DESC')->get();
+            return view('jenis.index', ['title' => 'Jenis',])->with($data);
+        }catch (Exception | PDOException $e) {
+        }
     }
 
     /**
@@ -30,8 +35,11 @@ class JenisController extends Controller
      */
     public function store(StoreJenisRequest $request)
     {
-        $data = Jenis::create($request->all());
-        return redirect('jenis')->with('success', 'Data Jenis Berhasil ditambahkan!');
+        try {
+            $data = Jenis::create($request->all());
+            return redirect('jenis')->with('success', 'Data Jenis Berhasil ditambahkan!');
+        }catch (Exception | PDOException $e) {
+        }
     }
 
     /**
@@ -55,8 +63,11 @@ class JenisController extends Controller
      */
     public function update(UpdateJenisRequest $request, Jenis $jeni)
     {
-        $data = $jeni->update($request->all());
-        return redirect('jenis')->with('success', 'Data Jenis berhasil diubah!');
+        try {
+            $data = $jeni->update($request->all());
+            return redirect('jenis')->with('success', 'Data Jenis berhasil diubah!');
+        }catch (Exception | PDOException $e) {
+        }
     }
 
     /**
@@ -64,7 +75,10 @@ class JenisController extends Controller
      */
     public function destroy(Jenis $jeni)
     {
-        $data = $jeni->delete();
-        return redirect('jenis')->with('success', 'Data Jenis berhasil dihapus!');
+        try {
+            $data = $jeni->delete();
+            return redirect('jenis')->with('success', 'Data Jenis berhasil dihapus!');
+        }catch (Exception | PDOException $e) {
+        }
     }
 }

@@ -16,4 +16,9 @@ class Menu extends Model
     {
         return $this->belongsTo(Kategori::class, 'kategori_id');
     }
+
+    public function stock()
+    {
+        return $this->hasOne(Stock::class, 'menu_id', 'id');
+    }
 }

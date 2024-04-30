@@ -16,7 +16,7 @@ class KategoriImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new Kategori([
-            'name' => $row['name']
+            'name' => $row['0']
         ]);
     }
 

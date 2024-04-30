@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Detail_transaction;
+use App\Models\DetailTransaction;
 use App\Http\Requests\StoreDetail_transactionRequest;
 use App\Http\Requests\UpdateDetail_transactionRequest;
 
@@ -35,7 +35,7 @@ class DetailTransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Detail_transaction $detail_transaction)
+    public function show(DetailTransaction $detail_transaction)
     {
         //
     }
@@ -43,7 +43,7 @@ class DetailTransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Detail_transaction $detail_transaction)
+    public function edit(DetailTransaction $detail_transaction)
     {
         //
     }
@@ -51,7 +51,7 @@ class DetailTransactionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDetail_transactionRequest $request, Detail_transaction $detail_transaction)
+    public function update(UpdateDetail_transactionRequest $request, DetailTransaction $detail_transaction)
     {
         //
     }
@@ -59,7 +59,7 @@ class DetailTransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Detail_transaction $detail_transaction)
+    public function destroy(DetailTransaction $detail_transaction)
     {
         //
     }

@@ -11,7 +11,7 @@ class UpdateMenuRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateMenuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'kategori_id' => 'required',
+            'menu_name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'image' => 'required|mimes:png,jpg,jpeg,gif'
         ];
     }
 }

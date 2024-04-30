@@ -31,16 +31,19 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Admin',
-            'username' => 'admin',
-            'password' => bcrypt('qwerty'),
+            'username' => 'admin@gmail.com',
+            'password' => bcrypt('Shuudesh07!;'),
             'roles_id' => '1'
         ]);
 
         User::create([
             'name' => 'Karyawan',
-            'username' => 'karyawan',
-            'password' => bcrypt('qwerty'),
+            'username' => 'karyawan@gmail.com',
+            'password' => bcrypt('Khooomeei12!;'),
             'roles_id' => '2'
         ]);
+
+        $this->call(KategoriSeeder::class);
+        $this->call(MenuSeeder::class);
     }
 }

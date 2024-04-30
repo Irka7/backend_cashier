@@ -9,7 +9,7 @@
     <tbody>
         @foreach ($kategoris as $k)
             <tr>
-                <td>{{ $i = !isset($i)?$i=1:++$i }}</td>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $k->name }}</td>
                 <td>
                     <button class="btn btn-info" data-toggle="modal" data-target="#formKategori" data-mode="edit" data-id="{{ $k->id }}" data-name="{{ $k->name }}"><i class="fas fa-edit"></i></button>

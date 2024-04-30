@@ -42,7 +42,7 @@
                 </button>
             </div>
         @endif
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formKategori">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formMenu">
             Tambah Menu
         </button>
         {{-- <a href="{{ route('export-kategori') }}" class="btn btn-success">
@@ -78,7 +78,7 @@
     })
 
     $(function () {
-        $('#tabelKategori').DataTable()
+        $('#tabelMenu').DataTable()
 
         $('.btn-delete').on('click', function(e){
             e.preventDefault()
@@ -97,27 +97,55 @@
             })
         })
 
-        $('#formKategori').on('show.bs.modal', function(e){
+        $('#formMenu').on('show.bs.modal', function(e){
             // console.log('edit')
             const btn = $(e.relatedTarget)
             console.log(btn.data('mode'))
             const mode = btn.data('mode')
-            const name = btn.data('name')
+            const menu_name = btn.data('menu_name')
+            const kategori_id = btn.data('kategori_id')
+            const price = btn.data('price')
+            const image = btn.data('image')
+            const description = btn.data('description')
             const id = btn.data('id')
             const modal = $(this)
             console.log(mode)
+            console.log(kategori_id)
             if(mode === 'edit'){
-                modal.find('.modal-title').text('Edit Data Kategori')
-                modal.find('#name').val(name)
-                modal.find('.modal-body form').attr('action', '{{ url('kategori') }}/'+id)
+                modal.find('.modal-title').text('Edit Data Menu')
+                modal.find('#menu_name').val(menu_name)
+                modal.find('#kategori_id').val(kategori_id)
+                modal.find('#price').val(price)
+                modal.find('#old_image').val(image)
+                modal.find('#description').val(description)
+                modal.find('.img-preview').attr('src', '{{ asset("storage/image") }}/' + image)
+                modal.find('.modal-body form').attr('action', '{{ url('menu') }}/'+id)
                 modal.find('#method').html('@method('PATCH')')
             }else{
                 modal.find('.modal-title').text('Input Data Kategori')
-                modal.find('#name').val('')
+                modal.find('#menu_name').val('')
+                modal.find('#kategori_id').val('')
+                modal.find('#price').val('')
+                modal.find('#old_image').val('')
+                modal.find('#description').val('')
+                modal.find('.img-preview').attr('src', '')
                 modal.find('#method').html('')
-                modal.find('.modal-body form').attr('action', '{{ url("kategori") }}')
+                modal.find('.modal-body form').attr('action', '{{ url("menu") }}')
             }
         })
+        function previewImage(){
+            const image = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                imgPreview.src = oFREvent.target.result;
+            }
+        }
     })
 </script>
 @endpush

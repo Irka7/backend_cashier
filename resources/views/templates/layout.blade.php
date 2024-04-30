@@ -74,7 +74,7 @@
                             </a>
                         </li>
                     </ul>
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    {{-- <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
@@ -82,11 +82,11 @@
                             <a href="produk" class="nav-link">
                                 <i class="nav-icon fas fa-box"></i>
                                 <p>
-                                    produk
+                                    Produk
                                 </p>
                             </a>
                         </li>
-                    </ul>
+                    </ul> --}}
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
@@ -95,11 +95,37 @@
                             <a href="kategori" class="nav-link">
                                 <i class="nav-icon fas fa-list"></i>
                                 <p>
-                                    kategori
+                                    Kategori
                                 </p>
                             </a>
                         </li>
                     </ul>
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="menu" class="nav-link">
+                                <i class="nav-icon fas fa-cubes"></i>
+                                <p>
+                                    Menu
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                    {{-- <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+                    <li class="nav-item">
+                        <a href="grafik" class="nav-link">
+                            <i class="nav-icon fas fa-cubes"></i>
+                            <p>
+                                Grafik
+                            </p>
+                        </a>
+                    </li>
+                </ul> --}}
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
@@ -118,14 +144,40 @@
                         <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="info" class="nav-link">
-                                <i class="nav-icon fas fa-info"></i>
+                            <a href="stok" class="nav-link">
+                                <i class="nav-icon fas fa-cube"></i>
                                 <p>
-                                    Tentang Aplikasi
+                                    Stok
                                 </p>
                             </a>
                         </li>
                     </ul>
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+                    <li class="nav-item">
+                        <a href="transaksi" class="nav-link">
+                            <i class="nav-icon fas fa-cart-plus"></i>
+                            <p>
+                                Transaksi
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+                    {{-- <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="info" class="nav-link">
+                                <i class="nav-icon fas fa-envelope"></i>
+                                <p>
+                                    Contact Us
+                                </p>
+                            </a>
+                        </li>
+                    </ul> --}}
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
@@ -153,10 +205,11 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>{{ $title }}</h1>
+                            <h1>{{ $title }} @yield('date')</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
+                                @yield('button')
                                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                                 <li class="breadcrumb-item active">{{ $title }}</li>
                             </ol>
@@ -198,6 +251,8 @@
     <script src="{{ asset('adminlte3') }}/js/sweetalert.min.js"></script>
     <script src="{{ asset('adminlte3') }}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ asset('adminlte3') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     @stack('script')
     {{-- @livewireScripts --}}
 </body>

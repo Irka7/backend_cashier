@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DetailTransaction;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class DetailTransactionSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DetailTransaction::factory()->count(100)->create();
     }
 }

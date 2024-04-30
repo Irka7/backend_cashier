@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Table;
 use App\Http\Requests\StoreTableRequest;
 use App\Http\Requests\UpdateTableRequest;
+use Exception;
+use PDOException;
 
 class TableController extends Controller
 {
@@ -13,7 +15,11 @@ class TableController extends Controller
      */
     public function index()
     {
-        //
+        // try {
+            $data['tables'] = Table::orderBy('created_at', 'DESC');
+            return view('meja.index', ['title' => 'Meja'])->with($data);
+        // }catch (Exception | PDOException $e) {
+        // }
     }
 
     /**
@@ -21,7 +27,8 @@ class TableController extends Controller
      */
     public function create()
     {
-        //
+       //
+
     }
 
     /**
@@ -29,7 +36,11 @@ class TableController extends Controller
      */
     public function store(StoreTableRequest $request)
     {
-        //
+        // try {
+            $data = Table::create($request->all());
+            return redirect('meja')->with('success', 'Data Meja berhasil ditambah!');
+        // }catch (Exception | PDOException $e) {
+        // }
     }
 
     /**
@@ -51,16 +62,24 @@ class TableController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTableRequest $request, Table $table)
+    public function update(UpdateTableRequest $request, Table $table, $id)
     {
-        //
+        try {
+            Table::find($id)->update($request->all());
+            return redirect('meja')->with('success', 'Data Meja berhasil diubah!');
+        }catch (Exception | PDOException $e) {
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Table $table)
+    public function destroy(Table $table, $id)
     {
-        //
+        try {
+            Table::where('id',$id)->delete();
+            return redirect('meja')->with('success', 'Data Meja berhasil dihapus!');
+        }catch (Exception | PDOException $e) {
+        }
     }
 }

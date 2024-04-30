@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Jenis;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -18,5 +19,7 @@ class JenisSeeder extends Seeder
         // for($i = 1 <= 50; $i++){
         //     DB::table('jenis')
         // }
+
+        \App\Models\Jenis::factory(10)->create();
     }
 }

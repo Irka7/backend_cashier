@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateKategoriRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\KategoriExport;
 use App\Imports\KategoriImport;
+use Exception;
+use PDOException;
 
 class KategoriController extends Controller
 {
@@ -16,8 +18,11 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $data['kategoris'] = Kategori::orderBy('created_at', 'DESC')->get();
-        return view('kategori.index', [ 'title' => 'Kategori' ])->with($data);
+        try {
+            $data['kategoris'] = Kategori::orderBy('created_at', 'DESC')->get();
+            return view('kategori.index', [ 'title' => 'Kategori' ])->with($data);
+        }catch (Exception | PDOException $e) {
+        }
     }
 
     /**
@@ -33,8 +38,11 @@ class KategoriController extends Controller
      */
     public function store(StoreKategoriRequest $request)
     {
-        $data = Kategori::create($request->all());
-        return redirect('kategori')->with('success', 'Data Kategori Berhasil ditambahkan!');
+        try {
+            $data = Kategori::create($request->all());
+            return redirect('kategori')->with('success', 'Data Kategori Berhasil ditambahkan!');
+        }catch (Exception | PDOException $e) {
+        }
     }
 
     /**
@@ -58,8 +66,11 @@ class KategoriController extends Controller
      */
     public function update(UpdateKategoriRequest $request, Kategori $kategori)
     {
-        $data = $kategori->update($request->all());
-        return redirect('kategori')->with('success', 'Data Kategori berhasil diubah!');
+        try {
+            $data = $kategori->update($request->all());
+            return redirect('kategori')->with('success', 'Data Kategori berhasil diubah!');
+        }catch (Exception | PDOException $e) {
+        }
     }
 
     /**
@@ -67,20 +78,26 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        $data = $kategori->delete();
-        return redirect('kategori')->with('success', 'Data Kategori berhasil dihapus!');
+        try {
+            $data = $kategori->delete();
+            return redirect('kategori')->with('success', 'Data Kategori berhasil dihapus!');
+        }catch (Exception | PDOException $e) {
+        }
     }
 
     public function exportData()
     {
-        $date = date('Y-m-d');
-        return Excel::download(new KategoriExport, $date.'_Kategori.xlsx');
+        try {
+            $date = date('Y-m-d');
+            return Excel::download(new KategoriExport, $date.'_Kategori.xlsx');
+        }catch (Exception | PDOException $e) {
+        }
     }
 
     public function importData()
     {
-        Excel::import(new KategoriImport, request()->file('import'));
+            Excel::import(new KategoriImport, request()->file('import'));
+            return redirect()->back()->with('success', 'Import Data Berhasil!');
 
-        return redirect()->back()->with('success', 'Import Data Berhasil!');
     }
 }

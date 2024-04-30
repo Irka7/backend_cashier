@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Absensi;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreAbsensiRequest;
 use App\Http\Requests\UpdateAbsensiRequest;
 
@@ -13,7 +15,9 @@ class AbsensiController extends Controller
      */
     public function index()
     {
-        //
+        $data['absensis'] = Absensi::orderBy('created_at', 'DESC')->get();
+        $statusOptions = Absensi::getStatusOptions();
+        return view('absensi.index', compact('statusOptions'), ['title' => 'Absensi Kerja'])->with($data);
     }
 
     /**
@@ -27,9 +31,16 @@ class AbsensiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAbsensiRequest $request)
+    public function store(Request $request)
     {
-        //
+        $data = new Absensi();
+        $data->namaKaryawan = $request->namaKaryawan;
+        $data->tanggalMasuk = now();
+        $data->waktuMasuk = Carbon::now()->timezone('Asia/Jakarta');
+        $data->status = $request->status;
+        $data->waktuKeluar = Carbon::now()->startOfDay();
+        $data->save();
+        return redirect('absensi')->with('success', 'Data Absensi berhasil ditambahkan!');
     }
 
     /**
@@ -61,6 +72,7 @@ class AbsensiController extends Controller
      */
     public function destroy(Absensi $absensi)
     {
-        //
+        $data = $absensi->delete();
+        return redirect('absensi')->with('success', 'Data Absensi berhasil dihapus!');
     }
 }

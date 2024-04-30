@@ -21,12 +21,12 @@
           </div>
         </div>
         <div class="card-body">
-          @if (session('success'))
-              <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  {{ session('success') }}
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
               </div>
           @endif
           @if ($errors->any())
@@ -43,6 +43,12 @@
           @endif
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formJenis">
               Tambah Jenis
+          </button>
+          <a href="#" class="btn btn-success">
+            <i class="fa fa-file-excel"></i> Export
+          </a>
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#formImport">
+            <i class="fas fa-file-excel"></i> Import
           </button>
           <div class="mt-3">
               @include('jenis.data')

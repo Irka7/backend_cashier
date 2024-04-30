@@ -1,7 +1,8 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\ations\tugas\backend_cashier\database\factories;
 
+use App\Models\Jenis;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class JenisFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->name()
         ];
     }
 }

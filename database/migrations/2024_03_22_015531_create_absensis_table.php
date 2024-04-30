@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('namaKaryawan');
             $table->date('tanggalMasuk');
-            $table->timestamp('waktuMasuk')->useCurrent();
-            $table->enum('status', ['Masuk', 'Sakit', 'Cuti']);
-            $table->timestamp('waktuKeluar')->useCurrent();
+            $table->time('waktuMasuk')->useCurrent();
+            $table->enum('status', ['Masuk', 'Sakit', 'Cuti'])->default('Masuk');
+            $table->time('waktuKeluar')->useCurrent();
             $table->timestamps();
         });
     }
