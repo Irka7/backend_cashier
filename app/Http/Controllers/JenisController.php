@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jenis;
-use App\Http\Requests\StoreJenisRequest;
-use App\Http\Requests\UpdateJenisRequest;
+use App\Exports\JenisExport;
 use Exception;
 use PDOException;
+use App\Models\Jenis;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\StoreJenisRequest;
+use App\Http\Requests\UpdateJenisRequest;
+use App\Imports\JenisImport;
 
 class JenisController extends Controller
 {
@@ -80,5 +83,27 @@ class JenisController extends Controller
             return redirect('jenis')->with('success', 'Data Jenis berhasil dihapus!');
         }catch (Exception | PDOException $e) {
         }
+    }
+
+    public function exportData()
+    {
+        try {
+            $date = date('Y-m-d');
+            return Excel::download(new JenisExport, $date.'_Jenis.xlsx');
+        }catch (Exception | PDOException $e) {
+        }
+    }
+
+    public function importData()
+    {
+            Excel::import(new JenisImport, request()->file('import'));
+            return redirect()->back()->with('success', 'Import Data Berhasil!');
+
+    }
+
+    public function cetakPDF()
+    {
+        $data['jenis'] = Jenis::get();
+        return view('jenis.cetak', [ 'title' => 'Jenis' ])->with($data);
     }
 }

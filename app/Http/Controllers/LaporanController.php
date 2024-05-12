@@ -18,53 +18,34 @@ class LaporanController extends Controller
      */
     public function index(Request $request)
     {
-        $tanggalAwal = date('Y-m-d', mktime(0, 0, 0, date('m'), 1, date('Y')));
-        $tanggalAkhir = date('Y-m-d');
 
-        if ($request->has('tanggal_awal') && $request->tanggal_awal != "" && $request->has('tanggal_akhir') && $request->tanggal_akhir) {
-            $tanggalAwal = $request->tanggal_awal;
-            $tanggalAkhir = $request->tanggal_akhir;
-        }
+        $awal = date('Y-m-d', mktime(0, 0, 0, date('m'), 1, date('Y')));
+        $akhir = date('Y-m-d');
 
-        return view('laporan.index', [ 'title' => 'Laporan'], compact('tanggalAwal', 'tanggalAkhir'));
+        // if ($request->has('awal') && $request->awal != "" && $request->has('akhir') && $request->akhir) {
+        //     $tanggalAwal = $request->awal;
+        //     $tanggalAkhir = $request->akhir;
+        // }
+
+    $data['transaksi'] = Transaction::orderBy('tanggal', 'DESC')->get();
+
+        return view('laporan.index', compact('awal', 'akhir') ,[ 'title' => 'Laporan'])->with($data);
     }
 
-    public function getData($awal, $akhir)
+    public function filter(Request $request)
     {
-        $no = 1;
-        $data = array();
-        $pendapatan = 0;
-        $total_pendapatan = 0;
+        $awal = $request->awal;
+        $akhir = $request->akhir;
 
-        while (strtotime($awal) <= strtotime($akhir)) {
-            $tanggal = $awal;
-            $awal = date('Y-m-d', strtotime("+1 day", strtotime($awal)));
+        $data['transaksi'] = Transaction::whereDate('tanggal', '>=', $awal)->whereDate('tanggal', '<=', $akhir)->get();
 
-            $total_transaksi = Transaction::where('created_at', 'LIKE', "%$tanggal%")->sum('nominal');
-
-            $total_pendapatan += $total_transaksi;
-
-            $row = array();
-            $row['DT_RowIndex'] = $no++;
-            $row['tanggal'] = $tanggal;
-            $row['pendapatan'] = $total_transaksi;
-
-            $data[] = $row;
-        }
-
-        $data[] = [
-            'DT_RowIndex' => '',
-            'tanggal' => 'Total Pendapatan',
-            'pendapatan' => ($total_pendapatan),
-        ];
-
-        return $data;
+        return view('laporan.index',compact('awal', 'akhir'), ['title' => 'Laporan'])->with($data);
     }
 
-    public function data($awal, $akhir)
+    public function exportPDF($awal, $akhir)
     {
-        $data = $this->getData($awal, $akhir);
-
-        return response()->json($data);
+        // dd("Awal : ".$awal, "Akhir : ".$akhir);
+        $data['transaksi'] = Transaction::whereBetween('tanggal', [$awal, $akhir])->get();
+        return view('laporan.cetak', [ 'title' => 'Pendapatan' ])->with($data);
     }
 }

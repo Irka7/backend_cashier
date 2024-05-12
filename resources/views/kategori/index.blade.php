@@ -51,6 +51,9 @@
         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#formImport">
             <i class="fas fa-file-excel"></i> Import
         </button>
+        <a href="{{ route('cetak-kategori') }}" target="_blank" class="btn btn-danger">
+            <i class="fa fa-file-pdf"></i> Export
+        </a>
         <div class="mt-3">
             @include('kategori.data')
         </div>

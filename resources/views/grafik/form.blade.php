@@ -14,14 +14,14 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-4 col-form-label">Tanggal Awal</label>
                         <div class="col-sm-8">
-                            <input type="date" class="form-control" id="start_date" value="" name="start_date">
+                            <input type="date" class="form-control" id="awal" value="" name="awal">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="name" class="col-sm-4 col-form-label">Tanggal Akhir</label>
                         <div class="col-sm-8">
-                            <input type="date" class="form-control" id="end_date" value="" name="end_date">
+                            <input type="date" class="form-control" id="akhir" value="" name="akhir">
                         </div>
                     </div>
 

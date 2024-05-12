@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Table;
-use App\Http\Requests\StoreTableRequest;
-use App\Http\Requests\UpdateTableRequest;
 use Exception;
 use PDOException;
+use App\Models\Table;
+use App\Exports\MejaExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\StoreTableRequest;
+use App\Http\Requests\UpdateTableRequest;
+use App\Imports\MejaImport;
 
 class TableController extends Controller
 {
@@ -81,5 +84,27 @@ class TableController extends Controller
             return redirect('meja')->with('success', 'Data Meja berhasil dihapus!');
         }catch (Exception | PDOException $e) {
         }
+    }
+
+    public function exportData()
+    {
+        try {
+            $date = date('Y-m-d');
+            return Excel::download(new MejaExport, $date.'_Meja.xlsx');
+        }catch (Exception | PDOException $e) {
+        }
+    }
+
+    public function importData()
+    {
+            Excel::import(new MejaImport, request()->file('import'));
+            return redirect()->back()->with('success', 'Import Data Berhasil!');
+
+    }
+
+    public function cetakPDF()
+    {
+        $data['table'] = Table::get();
+        return view('meja.cetak', [ 'title' => 'Meja' ])->with($data);
     }
 }

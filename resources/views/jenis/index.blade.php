@@ -44,12 +44,15 @@
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formJenis">
               Tambah Jenis
           </button>
-          <a href="#" class="btn btn-success">
+          <a href="{{ route('export-jenis') }}" class="btn btn-success">
             <i class="fa fa-file-excel"></i> Export
           </a>
           <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#formImport">
             <i class="fas fa-file-excel"></i> Import
           </button>
+          <a href="{{ route('cetak-jenis') }}" target="_blank" class="btn btn-danger">
+            <i class="fa fa-file-pdf"></i> Export
+        </a>
           <div class="mt-3">
               @include('jenis.data')
           </div>

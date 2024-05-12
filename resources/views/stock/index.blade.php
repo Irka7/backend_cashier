@@ -45,12 +45,15 @@
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formStok">
             Tambah Stok
         </button>
-        {{-- <a href="{{ route('export-kategori') }}" class="btn btn-success">
+        <a href="{{ route('export-stok') }}" class="btn btn-success">
             <i class="fa fa-file-excel"></i> Export
         </a>
         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#formImport">
             <i class="fas fa-file-excel"></i> Import
-        </button> --}}
+        </button>
+        <a href="{{ route('cetak-stok') }}" target="_blank" class="btn btn-danger">
+            <i class="fa fa-file-pdf"></i> Export
+        </a>
         <div class="mt-3">
             @include('stock.data')
         </div>
@@ -108,13 +111,13 @@
             const modal = $(this)
             console.log(mode)
             if(mode === 'edit'){
-                modal.find('.modal-title').text('Edit Data Menu')
+                modal.find('.modal-title').text('Edit Data Stok')
                 modal.find('#stock').val(stock)
                 modal.find('#menu_id').val(menu_id)
                 modal.find('.modal-body form').attr('action', '{{ url('stok') }}/'+id)
                 modal.find('#method').html('@method('PATCH')')
             }else{
-                modal.find('.modal-title').text('Input Data Kategori')
+                modal.find('.modal-title').text('Input Data Stok')
                 modal.find('#stock').val('')
                 modal.find('#menu_id').val('')
                 modal.find('#method').html('')

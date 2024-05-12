@@ -1,9 +1,9 @@
 @extends('templates.layout')
 
 @section('button')
-{{-- <button type="button" class="btn btn-success mr-3" data-toggle="modal" data-target="#formKalender">
+<button type="button" class="btn btn-success mr-3" data-toggle="modal" data-target="#formKalender">
     <i class="fas fa-calendar"> {{ $startDate }} s/d {{ $endDate }}</i>
-</button> --}}
+</button>
 @endsection
 
 @push('style')
@@ -18,7 +18,7 @@
 
     <!-- Default box -->
     <div class="modal-body">
-        <form id="filterForm" action="grafik" method="get">
+        {{-- <form id="filterForm" action="grafik" method="get">
             @csrf
             <div id="method" class="method"></div>
             <div class="row">
@@ -40,7 +40,7 @@
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </div>
-    </form>
+    </form> --}}
     <div class="row">
 
         <div class="col-lg-4 col-6">
@@ -154,7 +154,7 @@
 
   </section>
 
-  @include('grafik.form')
+  {{-- @include('grafik.form') --}}
 @endsection
 
 @push('script')

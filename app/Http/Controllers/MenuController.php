@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Menu;
-use App\Http\Requests\StoreMenuRequest;
-use App\Http\Requests\UpdateMenuRequest;
-use App\Models\Kategori;
+use App\Exports\MenuExport;
 use Exception;
 use PDOException;
-use Illuminate\Support\Facades\Storage;
-
+use App\Models\Menu;
+use App\Models\Kategori;
 use function Laravel\Prompts\select;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\StoreMenuRequest;
+
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateMenuRequest;
+use App\Imports\MenuImport;
 
 class MenuController extends Controller
 {
@@ -121,5 +124,27 @@ class MenuController extends Controller
 
         $menu->delete();
         return redirect('menu')->with('success', 'Data Menu berhasil dihapus!');
+    }
+
+    public function exportData()
+    {
+        try {
+            $date = date('Y-m-d');
+            return Excel::download(new MenuExport, $date.'_Menu.xlsx');
+        }catch (Exception | PDOException $e) {
+        }
+    }
+
+    public function importData()
+    {
+            Excel::import(new MenuImport, request()->file('import'));
+            return redirect()->back()->with('success', 'Import Data Berhasil!');
+
+    }
+
+    public function cetakPDF()
+    {
+        $data['menu'] = Menu::with('kategori')->get();
+        return view('menu.cetak', [ 'title' => 'Menu' ])->with($data);
     }
 }

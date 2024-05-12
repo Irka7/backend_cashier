@@ -2,32 +2,29 @@
 
 namespace App\Exports;
 
-use App\Models\Kategori;
+use App\Models\Table;
+use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Events\BeforeExport;
-use Maatwebsite\Excel\Events\AfterSheet;
-use Maatwebsite\Excel\Sheet;
 
-class KategoriExport implements FromCollection, WithHeadings, WithEvents
+class MejaExport implements FromCollection, WithEvents, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Kategori::all();
+        return Table::all();
     }
 
     public function headings(): array
     {
         return [
             'No.',
-            'Nama',
+            'Nomor Meja',
             'Tanggal Input',
-            'Tanggal Update'
+            'Tanggal Output'
         ];
     }
 
@@ -42,7 +39,7 @@ class KategoriExport implements FromCollection, WithHeadings, WithEvents
 
                 $event->sheet->insertNewRowBefore(1);
                 $event->sheet->mergeCells('A1:D1');
-                $event->sheet->setCellValue('A1', 'DATA KATEGORI');
+                $event->sheet->setCellValue('A1', 'Data Meja');
                 $event->sheet->getStyle('A1')->getFont()->setBold(true);
                 $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
@@ -57,5 +54,4 @@ class KategoriExport implements FromCollection, WithHeadings, WithEvents
             }
         ];
     }
-
 }

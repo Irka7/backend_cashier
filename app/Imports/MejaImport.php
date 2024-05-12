@@ -2,13 +2,11 @@
 
 namespace App\Imports;
 
-use App\Models\Jenis;
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
+use App\Models\Table;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class JenisImport implements ToModel, WithHeadingRow
+class MejaImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -17,8 +15,8 @@ class JenisImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        return new Jenis([
-            'name' => $row['nama'],
+        return new Table([
+            'nomor_meja' => $row['nomor_meja'],
         ]);
     }
 

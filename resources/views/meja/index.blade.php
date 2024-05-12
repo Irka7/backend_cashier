@@ -45,15 +45,15 @@
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#formMeja">
             Tambah Meja
         </button>
-        {{-- <a href="{{ route('export-kategori') }}" class="btn btn-success">
+        <a href="{{ route('export-meja') }}" class="btn btn-success">
             <i class="fa fa-file-excel"></i> Export
         </a>
         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#formImport">
             <i class="fas fa-file-excel"></i> Import
         </button>
-        <a href="{{ route('exportPDF-kategori') }}" class="btn btn-danger">
+        <a href="{{ route('cetak-meja') }}" target="_blank" class="btn btn-danger">
             <i class="fa fa-file-pdf"></i> Export
-        </a> --}}
+        </a>
         <div class="mt-3">
             @include('meja.data')
         </div>

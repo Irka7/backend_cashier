@@ -45,12 +45,15 @@
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formMenu">
             Tambah Menu
         </button>
-        {{-- <a href="{{ route('export-kategori') }}" class="btn btn-success">
+        <a href="{{ route('export-menu') }}" class="btn btn-success">
             <i class="fa fa-file-excel"></i> Export
         </a>
         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#formImport">
             <i class="fas fa-file-excel"></i> Import
-        </button> --}}
+        </button>
+        <a href="{{ route('cetak-menu') }}" target="_blank" class="btn btn-danger">
+            <i class="fa fa-file-pdf"></i> Export
+        </a>
         <div class="mt-3">
             @include('menu.data')
         </div>
@@ -122,7 +125,7 @@
                 modal.find('.modal-body form').attr('action', '{{ url('menu') }}/'+id)
                 modal.find('#method').html('@method('PATCH')')
             }else{
-                modal.find('.modal-title').text('Input Data Kategori')
+                modal.find('.modal-title').text('Input Data Menu')
                 modal.find('#menu_name').val('')
                 modal.find('#kategori_id').val('')
                 modal.find('#price').val('')

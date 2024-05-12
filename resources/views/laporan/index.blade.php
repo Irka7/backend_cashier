@@ -46,10 +46,10 @@
                 </button>
             </div>
         @endif
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formKategori">
-            Tambah Kategori
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formLaporan">
+            Ubah Tanggal
         </button>
-        <a href="{{ route('export-kategori') }}" class="btn btn-danger">
+        <a href="{{ route('cetak-laporan', [$awal, $akhir]) }}"  target="_blank" class="btn btn-danger">
             <i class="fa fa-file-pdf"></i> Export PDF
         </a>
 
@@ -71,34 +71,8 @@
 
 @push('script')
 <script>
-    $(document).ready(function() {
-            var dataTable = $('#tabelLaporan').DataTable({
-                // Mengatur kolom-kolom yang akan ditampilkan
-                columns: [
-                    { data: 'DT_RowIndex' },
-                    { data: 'tanggal' },
-                    { data: 'pendapatan' }
-                ],
-                // Mengambil data melalui AJAX dari kontroler
-                ajax: {
-                    url: '{{ route('laporan.data', ['awal' => ':tanggalAwal', 'akhir' => ':tanggalAkhir']) }}',
-                    method: 'GET',
-                    data: function(d) {
-                        // Mengambil nilai dari input tanggalAwal dan tanggalAkhir
-                        d.tanggalAwal = $('#tanggalAwal').val();
-                        d.tanggalAkhir = $('#tanggalAkhir').val();
-                    },
-                    dataSrc: '' // Nama properti yang berisi data pada respons JSON
-                },
-                // Mengatur penggunaan server-side processing
-                serverSide: true
-            });
-
-            // Ketika tombol filter diklik
-            $('#btnFilter').click(function() {
-                // Merefresh tabel untuk memuat data baru dengan menggunakan filter yang diberikan
-                dataTable.ajax.reload();
-            });
+        $(function () {
+            $('#tabelLaporan').DataTable()
         });
 </script>
 @endpush

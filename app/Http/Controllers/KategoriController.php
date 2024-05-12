@@ -100,4 +100,10 @@ class KategoriController extends Controller
             return redirect()->back()->with('success', 'Import Data Berhasil!');
 
     }
+
+    public function cetakPDF()
+    {
+        $data['kategoris'] = Kategori::get();
+        return view('kategori.cetak', [ 'title' => 'Kategori' ])->with($data);
+    }
 }
